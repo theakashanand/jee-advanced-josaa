@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}JEE Adv Rank Analysis{% endblock %}
+
+<link rel="shortcut icon" href="../static/icon.png">
+{% block page_content %}
+    <div class="page-header">
+        <h2>JOSAA Opening and Closing Ranks for JEE Advanced</h2>
+    </div>
+    <!--{{ wtf.quick_form(form) }}-->
+    <form  method="POST" action="{{ url_for('index') }}" class="form" role="form">
+        {{ form.csrf_token }}
+            <div class="row">
+                    <div class="form-field col-sm-3 col-xs-6">{{ form.year.label }} <a href="#" data-placement="top" data-toggle="tooltip" title="Select one or more years for which you would like to see results.">?</a>{{ form.year(class="form-control") }}</div>
+                    
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3 col-xs-6">
+                    <div class="form-field">{{ form.clg_name.label }} <a href="#" data-placement="top" data-toggle="tooltip" title="Enter a key word. Example searches are 'madras', 'iit madras', 'mad', etc. Leave blank to see all colleges.">?</a>{{ form.clg_name(class="form-control",  placeholder = "Eg: 'mad', 'madras', 'iit madras', etc.") }}</div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="form-field">{{ form.branch.label }} <a href="#" data-toggle="tooltip" title="Keep key words short. Example searches are 'elec', 'electrical', 'mech', etc. Leave blank to see all branches.">?</a>{{ form.branch(class="form-control",  placeholder = "Eg: 'elec', 'electrical', 'math', etc.") }}</div>
+                </div>
+        
+                <div class="col-sm-3 col-xs-6">
+                    <div class="form-field">{{ form.cat.label }} {{ form.cat(class="form-control") }}</div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="form-field">{{ form.gender.label }} {{ form.gender(class="form-control") }}</div>
+                </div>
+
+            </div><!--end row 2 -->
+            <br>
+            <div class="row text-center">
+                
+                    <button class="btn btn-primary but" type="submit">Submit</button>
+            
+            </div>
+            
+    </form>
+    
+
+    {% if tables != None %}
+        {% for table in tables %}
+            <br>
+            <h3>Results from {{ years[loop.index-1] }}</h3>
+            {{ table|safe }}            
+        {% endfor %}
+    {% endif %}
+    <br>
+    <br>
+    <p style="font-size: 11px;">All data from official statistics published by the Joint Seat Allocation Authority</p>
+
+    <hr>
+    <div class="footer text-right">
+        Developed by Akash Anand<br>
+        Department of Engineering Design, IIT Madras
+    </div>
+
+
+{% endblock %}
+
