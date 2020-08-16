@@ -1,0 +1,16 @@
+table{
+    
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+
+  }
+
+th{
+    background-color: lightgrey;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
